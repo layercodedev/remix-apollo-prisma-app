@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model Post {
+  id              String      @id  @default(uuid())
+  title           String    
+  slug            String
+  body            String
+  @@index([slug], name: "slug_idx")
+  @@map("posts")
+}
+
